@@ -1,3 +1,3 @@
 # Hola me llamo Nico!
 
-- [Blog](blog.md)
+- [Blog](blog/index.md)
