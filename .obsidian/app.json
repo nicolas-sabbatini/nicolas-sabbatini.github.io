@@ -1,1 +1,10 @@
-{}
+{
+  "autoConvertHtml": false,
+  "newFileLocation": "current",
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "alwaysUpdateLinks": true,
+  "userIgnoreFilters": [
+    "builder/"
+  ]
+}

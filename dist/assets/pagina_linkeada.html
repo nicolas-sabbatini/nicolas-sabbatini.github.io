@@ -1,0 +1,17 @@
+<p>Hola!</p>
+<p>Para transformar nuestros archivos de formato md a html vamos a utilizar el<br />
+paquete <a href="https://github.com/showdownjs/showdown">showdown</a> para añadir este<br />
+paquete vamos a ejecutar el siguiente comando.</p>
+<pre><code class="bash language-bash">deno install npm:showdown npm:@types/showdown</code></pre>
+<p>Ahora dentro de nuestro <code>main.ts</code> importamos el paquete y creamos un<br />
+convertidor.</p>
+<blockquote>
+  <p>Código</p>
+</blockquote>
+<pre><code class="ts language-ts">import showdown from "showdown";
+showdown.setFlavor("github");
+const converter = new showdown.Converter({
+  tables: true,
+  simpleLineBreaks: true,
+  strikethrough: true,
+});</code></pre>

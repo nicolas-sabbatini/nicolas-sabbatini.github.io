@@ -1,0 +1,163 @@
+<h1 id="creando-mi-propio-static-site-generator---01">Creando mi propio Static Site Generator - 01</h1>
+<h2 id="objetivo">Objetivo</h2>
+<p>Según el plan definido en el post 00 de la serie lo primero que tenemos que<br />
+conseguir es escanear toda nuestra bóveda de Obsidian para saber que archivos<br />
+tenemos en ella.</p>
+<blockquote>
+  <p>[!warning]<br />
+  Tenemos que tener en cuenta que dentro de la bóveda se van a<br />
+  encontrar archivos que no queremos escanear como la carpeta <code>.git</code></p>
+</blockquote>
+<h2 id="desarrollo">Desarrollo</h2>
+<p>Lo primero que vamos a realizar es crear una carpeta con el nombre de<br />
+<code>publisher</code> en donde vamos a inicializar el proyecto de Deno.</p>
+<pre><code class="bash language-bash">mkdir publisher
+cd publisher
+deno init</code></pre>
+<p>Dentro de la carpeta vamos a encontrar los archivos:</p>
+<ul>
+<li>deno.js</li>
+<li>main.ts</li>
+<li>main_test.ts</li>
+</ul>
+<p>Por ahora solo vamos a estar trabajando en <code>main.ts</code>, vamos a borrar todo el<br />
+contendido y vamos a empezar a crear nuestro publisher.</p>
+<blockquote>
+  <p>[!info]<br />
+  Se puede borrar sin miedo el <code>main_test.ts</code>, a donde vamos no<br />
+  necesitamos tests.</p>
+</blockquote>
+<p>La primera función que tenemos que tener en cuenta es<br />
+<a href="https://docs.deno.com/api/deno/~/Deno.readDirSync">Deno.readDirSync</a>, esta<br />
+función nos permite leer un directorio en nuestra computadora y todo su<br />
+contenido, si le pasamos como parámetro <code>".."</code> (Directorio padre), vamos a<br />
+obtener la lista de todos el contenido de la carpeta padre.</p>
+<blockquote>
+  <p>Código:</p>
+</blockquote>
+<pre><code class="ts language-ts">for (const dirEntry of Deno.readDirSync("..")) {
+  console.log(dirEntry.name);
+}</code></pre>
+<blockquote>
+  <p>Output:</p>
+</blockquote>
+<pre><code>index.md
+assets
+publisher
+.git
+blog
+.obsidian</code></pre>
+<p>En output tenemos multiples archivos/directorios que no queremos escanear, para<br />
+eso vamos a crear un filtro para todos esos archivos/directorios que no deseamos<br />
+escanear.</p>
+<blockquote>
+  <p>Código:</p>
+</blockquote>
+<pre><code class="ts language-ts">const IGNORE = [
+  "publisher",
+  ".git",
+  ".gitignore",
+  ".obsidian",
+];
+
+for (const dirEntry of Deno.readDirSync("..")) {
+  if (IGNORE.includes(dirEntry.name)) {
+    continue;
+  }
+  console.log(dirEntry.name);
+}</code></pre>
+<blockquote>
+  <p>Output:</p>
+</blockquote>
+<pre><code>index.md
+assets
+blog</code></pre>
+<p>Ya tenemos la la base del escaneo, leer un directorio e ignorar el contenido no<br />
+deseado. Ahora si tenemos un directorio dentro de otro deberíamos también poder<br />
+escanear los hijos del otro directorio.</p>
+<p>La forma más sencilla de hacer esto es creando una función recursiva, para eso<br />
+introducimos nuestro bucle en una función y si lo que leímos es de tipo<br />
+directorio volvemos a llamar la función sobre él.</p>
+<blockquote>
+  <p>Código</p>
+</blockquote>
+<pre><code class="ts language-ts">function scanDirs(path: string) {
+  for (const dirEntry of Deno.readDirSync(path)) {
+    if (IGNORE.includes(dirEntry.name)) {
+      continue;
+    }
+    console.log(dirEntry.name);
+    if (dirEntry.isDirectory &amp;&amp; !dirEntry.isSymlink) {
+      scanDirs(`${path}/${dirEntry.name}`);
+    }
+  }
+}
+scanDirs("..");</code></pre>
+<blockquote>
+  <p>Output:</p>
+</blockquote>
+<pre><code>index.md
+blog
+index.md
+creando_mi_propio_static_site_generator-01.md
+creando_mi_propio_static_site_generator-00.md</code></pre>
+<p>Con eso ya nuestra función de escaneo esta casi completa, lo que necesitamos<br />
+ahora es que en vez de imprimir los directorios y archivos, deberíamos crear un<br />
+árbol con los datos de nuestra bóveda.</p>
+<p>Para eso creamos la siguiente estructura de datos:</p>
+<pre><code class="ts language-ts">interface Tree {
+  name: string;
+  path: string;
+  childrens: Tree[];
+}</code></pre>
+<p>Posteriormente tenemos que modificar la función de escaneo de directorios para<br />
+retorne este objeto.</p>
+<blockquote>
+  <p>Código:</p>
+</blockquote>
+<pre><code class="ts language-ts">function scanDirs(path: string, name: string): Tree {
+  const node: Tree = { name, path, childrens: [] };
+  for (const dirEntry of Deno.readDirSync(path)) {
+    if (IGNORE.includes(dirEntry.name)) {
+      continue;
+    }
+    if (dirEntry.isDirectory &amp;&amp; !dirEntry.isSymlink) {
+      node.childrens!.push(scanDirs(`${path}/${dirEntry.name}`, dirEntry.name));
+    } else if (!dirEntry.isSymlink) {
+      node.childrens!.push({
+        name: dirEntry.name,
+        path: `${path}/${dirEntry.name}`,
+      });
+    }
+  }
+  return node;
+}
+console.log(scanDirs("..", "boveda"));</code></pre>
+<blockquote>
+  <p>Output:</p>
+</blockquote>
+<pre><code class="json language-json">{
+  "name": "boveda",
+  "path": "..",
+  "childrens": [
+    { "name": "index.md", "path": "../index.md" },
+    {
+      "name": "blog",
+      "path": "../blog",
+      "childrens": [
+        { "name": "index.md", "path": "../blog/index.md" },
+        {
+          "name": "creando_mi_propio_static_site_generator-01.md",
+          "path": "../blog/creando_mi_propio_static_site_generator-01.md"
+        },
+        {
+          "name": "creando_mi_propio_static_site_generator-00.md",
+          "path": "../blog/creando_mi_propio_static_site_generator-00.md"
+        }
+      ]
+    }
+  ]
+}</code></pre>
+<p>Con eso ya terminamos toda la función de escaneo de nuestro programa, podemos<br />
+borrar todos los <code>console.log</code> de el y comenzar a pensar en la siguiente parte<br />
+que es convertir nuestros post en archivos HTML.</p>
