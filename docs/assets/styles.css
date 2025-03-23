@@ -1,0 +1,78 @@
+h1 {
+  font-weight: bold;
+  color: #ea6962;
+}
+
+h2 {
+  font-weight: bold;
+  color: #e78a4e;
+}
+
+h3 {
+  font-weight: bold;
+  color: #d8a657;
+}
+
+h4 {
+  font-weight: bold;
+  color: #a9b665;
+}
+
+h5 {
+  font-weight: bold;
+  color: #7daea3;
+}
+
+body {
+  background-color: #282828;
+  color: #d4be98;
+}
+
+.roboto-mono-100 {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-mono-200 {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.roboto-mono-300 {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-mono-400 {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-mono-500 {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-mono-600 {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.roboto-mono-700 {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
