@@ -11,7 +11,6 @@ const IGNORE = [
 
 showdown.setFlavor("github");
 const converter = new showdown.Converter({
-  tables: false,
   strikethrough: true,
   extensions: [
     {
