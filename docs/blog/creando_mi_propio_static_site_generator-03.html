@@ -1,0 +1,52 @@
+<h1 id="creando-mi-propio-static-site-generator---03">Creando mi propio Static Site Generator - 03</h1>
+<h2 id="que-vamos-a-hacer">Que vamos a hacer</h2>
+<p>Ya tenemos el HTML de nuestros post ahora le tenemos que dar vida con un poco de CSS y un template para que todos tengan la misma estructura.</p>
+<h2 id="desarrollo">Desarrollo</h2>
+<p>Para utilizar los templates vamos a instalar <a href="https://handlebarsjs.com">handlebarsjs</a> que es un template engine mínimo.</p>
+<pre><code class="bash language-bash">deno install npm:handlebars</code></pre>
+<p>Creamos una carpeta donde vamos a guardar los templates dentro de nuestro proyecto de Deno y creamos un template simple.</p>
+<pre><code class="html language-html">&lt;html lang="es-AR"&gt;
+  &lt;head&gt;
+    &lt;!--Meta data de render--&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+
+    &lt;!--Título de la página--&gt;
+    &lt;title&gt;Mi blog&lt;/title&gt;
+
+    &lt;!--SEO--&gt;
+    &lt;meta name="description" content="Este es mi blog"&gt;
+    &lt;meta name="keywords" content="HTML, CSS, JavaScript, TypeScript, tutorial"&gt;
+    &lt;meta name="author" content="Mi nimbre"&gt;
+    &lt;meta name="robots" content="index, follow"&gt;
+
+    &lt;!--Favicon--&gt;
+    &lt;link rel="icon" type="image/png" href="favicon.png"&gt;
+
+    &lt;!--Tarjetas para redes sociales--&gt;
+    &lt;meta property="og:title" content="Título para compartir en redes"&gt;
+    &lt;meta property="og:description" content="Descripción en redes"&gt;
+    &lt;meta property="og:image" content="https://ejemplo.com/imagen.jpg"&gt;
+    &lt;meta property="og:url" content="https://ejemplo.com"&gt;
+    &lt;meta name="twitter:card" content="summary_large_image"&gt;
+
+    &lt;!--Estilos--&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+
+    &lt;!--Fuentes--&gt;
+    &lt;link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap"
+      rel="stylesheet"
+    &gt;
+
+    &lt;!--Scrips--&gt;
+    &lt;script src="script.js" defer&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    {{content}}
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<blockquote>
+  <p>[!NOTE]<br />
+  Los headers de ese template son ejemplos y vas a tener que codificarlos según corresponda</p>
+</blockquote>
