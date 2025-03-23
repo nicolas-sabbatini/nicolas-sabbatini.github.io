@@ -29,6 +29,6 @@ La idea básica que tengo planeada es crear un programa que tome una bóveda de 
   3. Insertar el HTML en templates
 - Parte 2
   1. Leer metadata de las páginas
-  2. Añadir la metadata leida a los templates y otras paginas
+  2. Añadir la metadata leída a los templates y otras paginas
 - Parte 3
   1. Añadir git submodules para comenzar a añadir proyectos públicos

@@ -1,9 +1,69 @@
-<h1 id="creando-mi-propio-static-site-generator---03">Creando mi propio Static Site Generator - 03</h1>
+<html lang="es-AR">
+  <head>
+    <!--Meta data de render-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Título de la página-->
+    <title>Mi blog</title>
+
+    <!--SEO--
+    <meta name="description" content="Este es mi blog">
+    <meta name="keywords" content="HTML, CSS, JavaScript, TypeScript, tutorial">
+    <meta name="author" content="Mi nimbre">
+    <meta name="robots" content="index, follow">
+    -->
+
+    <!--Favicon-->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="http://nicolas-sabbatini.github.io/assets/favicon.svg"
+    >
+
+    <!--Tarjetas para redes sociales--
+    <meta property="og:title" content="Título para compartir en redes">
+    <meta property="og:description" content="Descripción en redes">
+    <meta property="og:image" content="https://ejemplo.com/imagen.jpg">
+    <meta property="og:url" content="https://ejemplo.com">
+    <meta name="twitter:card" content="summary_large_image">
+    -->
+
+    <!--Estilos-->
+    <link
+      rel="stylesheet"
+      href="http://nicolas-sabbatini.github.io/assets/styles.css"
+    >
+
+    <!--Fuentes-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    >
+
+    <!--Highlig.js-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/gruvbox-dark-hard.min.css"
+    >
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+    ></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </head>
+  <body>
+    <h1 id="creando-mi-propio-static-site-generator---03">Creando mi propio Static Site Generator - 03</h1>
 <h2 id="que-vamos-a-hacer">Que vamos a hacer</h2>
 <p>Ya tenemos el HTML de nuestros post ahora le tenemos que dar vida con un poco de CSS y un template para que todos tengan la misma estructura.</p>
 <h2 id="desarrollo">Desarrollo</h2>
-<p>Para utilizar los templates vamos a instalar <a href="https://handlebarsjs.com">handlebarsjs</a> que es un template engine mínimo.</p>
+<p>Para utilizar los templates vamos a instalar <a href="https://handlebarsjs.com">Handlebars.js</a> que es un template engine mínimo en nuestro proyecto de Deno corriendo el siguiente comando.</p>
 <pre><code class="bash language-bash">deno install npm:handlebars</code></pre>
+<p>Y luego lo importamos en nuestro <code>main.ts</code>.</p>
+<pre><code class="ts language-ts">import Handlebars from "handlebars";</code></pre>
 <p>Creamos una carpeta donde vamos a guardar los templates dentro de nuestro proyecto de Deno y creamos un template simple.</p>
 <pre><code class="html language-html">&lt;html lang="es-AR"&gt;
   &lt;head&gt;
@@ -43,10 +103,38 @@
     &lt;script src="script.js" defer&gt;&lt;/script&gt;
   &lt;/head&gt;
   &lt;body&gt;
-    {{content}}
+    {{{content}}}
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <blockquote>
   <p>[!NOTE]<br />
   Los headers de ese template son ejemplos y vas a tener que codificarlos según corresponda</p>
 </blockquote>
+<p>Ahora al comienzo de nuestro programa cargamos el template.</p>
+<pre><code class="ts language-ts">const template = Handlebars.compile(
+  Deno.readTextFileSync("./template/base.html"),
+);</code></pre>
+<p>Y volvemos a modificar la función que crea los archivos, para que ejecute el template y con el resultado cree el archivo.</p>
+<pre><code class="ts language-ts">function createTreeOnFileSystem(tree: Tree, path: string) {
+  if (tree.childrens) {
+    Deno.mkdirSync(`${path}/${tree.name}`);
+    for (const c of tree.childrens) {
+      createTreeOnFileSystem(c, `${path}/${tree.name}`);
+    }
+    return;
+  }
+  const name = tree.name.split(".");
+  if (name[name.length - 1] !== "md") {
+    Deno.copyFileSync(tree.path, `${path}/${tree.name}`);
+  } else {
+    const mdFile = Deno.readTextFileSync(tree.path);
+    const content = converter.makeHtml(mdFile);
+    Deno.writeTextFileSync(
+      `${path}/${tree.name.replace(".md", ".html")}`,
+      template({ content }),
+    );
+  }
+}</code></pre>
+<p>Con estos cambios ya completamos el MVP de nuestro blog, ahora solo queda escribir posts y publicar.</p>
+  </body>
+</html>

@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/creando_mi_propio_static_site_generator-02.md",
+                "file": "index.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "creando_mi_propio_static_site_generator-02"
+              "title": "index"
             }
           }
         ]
@@ -141,26 +141,29 @@
   },
   "active": "796a9dbe3405b830",
   "lastOpenFiles": [
-    "blog/creando_mi_propio_static_site_generator-03.md",
-    "blog/creando_mi_propio_static_site_generator-02.md",
-    "blog/creando_mi_propio_static_site_generator-00.md",
+    "blog/index.md",
     "blog/creando_mi_propio_static_site_generator-01.md",
+    "blog/creando_mi_propio_static_site_generator-00.md",
+    "assets/MD to HTML test.md",
+    "blog/creando_mi_propio_static_site_generator-03.md",
+    "assets/favicon.svg",
+    "assets/Logo 2.svg",
+    "assets/styles.css",
+    "docs/blog/creando_mi_propio_static_site_generator-01.html",
+    "docs/blog/creando_mi_propio_static_site_generator-03.html",
+    "docs/blog/creando_mi_propio_static_site_generator-02.html",
+    "docs/blog/index.html",
+    "docs/blog/creando_mi_propio_static_site_generator-00.html",
+    "docs/blog",
+    "docs/assets/test.html",
+    "docs/assets/Untitled.html",
+    "docs/assets",
+    "blog/creando_mi_propio_static_site_generator-02.md",
     "Untitled.md",
     "assets/prueba.md",
     "assets/pagina_de_prueba.md",
     "assets/prueba.svg",
     "assets/pagina_linkeada.md",
-    "dist/blog",
-    "dist",
-    "publisher/deno.lock",
-    "assets/prueba.html",
-    "assets/output.html",
-    "assets/tohtml.lua",
-    "blog/tohtml.lua",
-    "assets/asd.html",
-    "publisher/asd.html",
-    "publisher/deno.json",
-    "blog/index.md",
     "index.md",
     "Excalidraw/Drawing 2025-03-21 15.36.09.excalidraw.md"
   ]

@@ -1,29 +1,32 @@
 import showdown from "showdown";
+import Handlebars from "handlebars";
 
 const IGNORE = [
   "publisher",
   ".git",
   ".gitignore",
   ".obsidian",
-  "dist",
+  "docs",
 ];
-
-const mdToHtmlExtension = {
-  type: "lang",
-  regex: /\[(.*?)\]\((.*?)\.md\)/g, // Matches links like [Link](path.md)
-  replace: (_: never, linkText: string, url: string) => {
-    return `[${linkText}](${url}.html)`; // Replaces .md with .html
-  },
-};
 
 showdown.setFlavor("github");
 const converter = new showdown.Converter({
-  tables: true,
+  tables: false,
   strikethrough: true,
   extensions: [
-    mdToHtmlExtension,
+    {
+      type: "lang",
+      regex: /\[(.*?)\]\((.*?)\.md\)/g, // Matches links like [Link](path.md)
+      replace: (_: never, linkText: string, url: string) => {
+        return `[${linkText}](${url}.html)`; // Replaces .md with .html
+      },
+    },
   ],
 });
+
+const template = Handlebars.compile(
+  Deno.readTextFileSync("./template/base.html"),
+);
 
 interface Tree {
   name: string;
@@ -62,22 +65,22 @@ function createTreeOnFileSystem(tree: Tree, path: string) {
     Deno.copyFileSync(tree.path, `${path}/${tree.name}`);
   } else {
     const mdFile = Deno.readTextFileSync(tree.path);
-    const html = converter.makeHtml(mdFile);
+    const content = converter.makeHtml(mdFile);
     Deno.writeTextFileSync(
       `${path}/${tree.name.replace(".md", ".html")}`,
-      html,
+      template({ content }),
     );
   }
 }
 
 function main() {
   try {
-    Deno.removeSync("../dist", { recursive: true });
+    Deno.removeSync("../docs", { recursive: true });
   } catch (err) {
     console.error(err);
   }
 
-  const tree = scanDirs("..", "dist");
+  const tree = scanDirs("..", "docs");
   createTreeOnFileSystem(tree, "..");
 }
 

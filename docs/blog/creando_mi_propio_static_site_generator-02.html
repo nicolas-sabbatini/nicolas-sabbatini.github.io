@@ -1,4 +1,62 @@
-<h1 id="creando-mi-propio-static-site-generator---02">Creando mi propio Static Site Generator - 02</h1>
+<html lang="es-AR">
+  <head>
+    <!--Meta data de render-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Título de la página-->
+    <title>Mi blog</title>
+
+    <!--SEO--
+    <meta name="description" content="Este es mi blog">
+    <meta name="keywords" content="HTML, CSS, JavaScript, TypeScript, tutorial">
+    <meta name="author" content="Mi nimbre">
+    <meta name="robots" content="index, follow">
+    -->
+
+    <!--Favicon-->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="http://nicolas-sabbatini.github.io/assets/favicon.svg"
+    >
+
+    <!--Tarjetas para redes sociales--
+    <meta property="og:title" content="Título para compartir en redes">
+    <meta property="og:description" content="Descripción en redes">
+    <meta property="og:image" content="https://ejemplo.com/imagen.jpg">
+    <meta property="og:url" content="https://ejemplo.com">
+    <meta name="twitter:card" content="summary_large_image">
+    -->
+
+    <!--Estilos-->
+    <link
+      rel="stylesheet"
+      href="http://nicolas-sabbatini.github.io/assets/styles.css"
+    >
+
+    <!--Fuentes-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    >
+
+    <!--Highlig.js-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/gruvbox-dark-hard.min.css"
+    >
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+    ></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </head>
+  <body>
+    <h1 id="creando-mi-propio-static-site-generator---02">Creando mi propio Static Site Generator - 02</h1>
 <h2 id="que-vamos-a-hacer">Que vamos a hacer</h2>
 <p>Después de <a href="creando_mi_propio_static_site_generator-01.html">escanear nuestra bóveda</a> y armar nuestro árbol con la información de la bóveda, tenemos que poder recorrer este árbol para poder replicar la estructura que posee en un directorio output (<code>dist</code>) en la cual pondremos los archivos ya transformados.</p>
 <h2 id="desarrollo">Desarrollo</h2>
@@ -79,3 +137,5 @@ const converter = new showdown.Converter({
   }
 }</code></pre>
 <p>Con estos cambios ya tenemos un static site generator sencillo que parsea nuestros post escritos en obsidian y los transforma en una página web estática la cual podemos ver desde el navegador, en el siguiente post vamos a meter el output en un template para que quede más bonita y no sea solo un texto básico.</p>
+  </body>
+</html>
