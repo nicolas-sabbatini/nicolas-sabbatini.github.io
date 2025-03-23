@@ -1,25 +1,28 @@
-h1 {
+h1, h2, h3, h4, h5, h6 {
+  font-size: 24px;
   font-weight: bold;
+  margin: 10px 0;
+  padding: 5px;
+  text-transform: none;
+}
+
+h1 {
   color: #ea6962;
 }
 
 h2 {
-  font-weight: bold;
   color: #e78a4e;
 }
 
 h3 {
-  font-weight: bold;
   color: #d8a657;
 }
 
 h4 {
-  font-weight: bold;
   color: #a9b665;
 }
 
 h5 {
-  font-weight: bold;
   color: #7daea3;
 }
 
@@ -46,7 +49,31 @@ body {
   background-color: #282828;
   color: #d4be98;
   font-family: "Roboto Mono", monospace;
-  width: 60rem;
   margin: auto;
+  font-size: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.content {
+  max-width: 62rem;
+  min-width: 15rem;
+  padding: 1rem;
+  margin: auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .content {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 400px) {
+  .content {
+    min-width: 100%;
+    padding: 0.5rem;
+  }
+}

@@ -1,6 +1,8 @@
 import showdown from "showdown";
 import Handlebars from "handlebars";
 
+const prod = true;
+
 const IGNORE = [
   "publisher",
   ".git",
@@ -68,7 +70,7 @@ function createTreeOnFileSystem(tree: Tree, path: string) {
     const content = converter.makeHtml(mdFile);
     Deno.writeTextFileSync(
       `${path}/${tree.name.replace(".md", ".html")}`,
-      template({ content }),
+      template({ content, prod }),
     );
   }
 }
