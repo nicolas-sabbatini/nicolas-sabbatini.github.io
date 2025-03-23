@@ -1,14 +1,12 @@
 import showdown from "showdown";
 import Handlebars from "handlebars";
 
-const prod = true;
+const VAULT_PATH = "../obsidian";
+const TARGET_PATH = "..";
+const TARGET_NAME = "docs";
 
 const IGNORE = [
-  "publisher",
-  ".git",
-  ".gitignore",
   ".obsidian",
-  "docs",
 ];
 
 showdown.setFlavor("github");
@@ -70,20 +68,20 @@ function createTreeOnFileSystem(tree: Tree, path: string) {
     const content = converter.makeHtml(mdFile);
     Deno.writeTextFileSync(
       `${path}/${tree.name.replace(".md", ".html")}`,
-      template({ content, prod }),
+      template({ content }),
     );
   }
 }
 
 function main() {
   try {
-    Deno.removeSync("../docs", { recursive: true });
+    Deno.removeSync(`${TARGET_PATH}/${TARGET_NAME}`, { recursive: true });
   } catch (err) {
     console.error(err);
   }
 
-  const tree = scanDirs("..", "docs");
-  createTreeOnFileSystem(tree, "..");
+  const tree = scanDirs(VAULT_PATH, TARGET_NAME);
+  createTreeOnFileSystem(tree, TARGET_PATH);
 }
 
 main();
