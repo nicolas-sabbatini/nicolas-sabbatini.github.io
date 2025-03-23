@@ -19,7 +19,6 @@ const mdToHtmlExtension = {
 showdown.setFlavor("github");
 const converter = new showdown.Converter({
   tables: true,
-  simpleLineBreaks: true,
   strikethrough: true,
   extensions: [
     mdToHtmlExtension,

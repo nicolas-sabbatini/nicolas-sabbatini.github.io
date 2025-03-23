@@ -16,7 +16,6 @@ try {
 }
 ```
 
-
 > [!INFO]
 > Como la función falla si este directorio no existe lo ponemos en un try catch.
 
@@ -37,7 +36,6 @@ function createTreeOnFileSystem(tree: Tree, path: string) {
 const tree = scanDirs("..", "dist");
 createTreeOnFileSystem(tree, "..");
 ```
-
 
 > [!WARNING]
 > No te olvides de añadir `dist` a la lista de IGNORE.

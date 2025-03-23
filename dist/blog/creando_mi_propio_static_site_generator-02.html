@@ -57,5 +57,25 @@ const converter = new showdown.Converter({
   simpleLineBreaks: true,
   strikethrough: true,
 });</code></pre>
-<p>Ya con eso tenemos todo lo necesario para transformar nuestros archivo para ser publicados en la web, modificamos la función que crea los archivos para utilizar el convertidor y crear los archivos faltantes con  la función <a href="https://docs.deno.com/api/deno/~/Deno.writeTextFileSync">Deno.writeTextFileSync</a>.</p>
-<pre><code class="ts language-ts"></code></pre>
+<p>Ya con eso tenemos todo lo necesario para transformar nuestros archivo para ser publicados en la web, modificamos la función que crea los archivos para utilizar el convertidor y crear los archivos faltantes con la función <a href="https://docs.deno.com/api/deno/~/Deno.writeTextFileSync">Deno.writeTextFileSync</a>.</p>
+<pre><code class="ts language-ts">function createTreeOnFileSystem(tree: Tree, path: string) {
+  if (tree.childrens) {
+    Deno.mkdirSync(`${path}/${tree.name}`);
+    for (const c of tree.childrens) {
+      createTreeOnFileSystem(c, `${path}/${tree.name}`);
+    }
+    return;
+  }
+  const name = tree.name.split(".");
+  if (name[name.length - 1] !== "md") {
+    Deno.copyFileSync(tree.path, `${path}/${tree.name}`);
+  } else {
+    const mdFile = Deno.readTextFileSync(tree.path);
+    const html = converter.makeHtml(mdFile);
+    Deno.writeTextFileSync(
+      `${path}/${tree.name.replace(".md", ".html")}`,
+      html,
+    );
+  }
+}</code></pre>
+<p>Con estos cambios ya tenemos un static site generator sencillo que parsea nuestros post escritos en obsidian y los transforma en una página web estática la cual podemos ver desde el navegador, en el siguiente post vamos a meter el output en un template para que quede más bonita y no sea solo un texto básico.</p>
