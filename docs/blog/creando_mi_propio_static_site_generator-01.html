@@ -10,9 +10,9 @@
     <!--SEO--
     <meta name="description" content="Este es mi blog">
     <meta name="keywords" content="HTML, CSS, JavaScript, TypeScript, tutorial">
-    <meta name="author" content="Mi nimbre">
-    <meta name="robots" content="index, follow">
     -->
+    <meta name="author" content="CoffeeBreak.inc">
+    <meta name="robots" content="index, follow">
 
     <!--Favicon-->
     <link
@@ -56,16 +56,23 @@
     </script>
   </head>
   <body>
+    <div class="header">
+      <div class="header-left">
+        <a href="/" class="page-title">CoffeeBreak.inc</a>
+      </div>
+      <div class="header-center"></div>
+      <div class="header-right"></div>
+    </div>
     <div class="content">
-      <h1 id="creando-mi-propio-static-site-generator---01">Creando mi propio Static Site Generator - 01</h1>
-<h2 id="objetivo">Objetivo</h2>
+      <h1 id="-creando-mi-propio-static-site-generator---01"># Creando mi propio Static Site Generator - 01</h1>
+<h2 id="-objetivo">## Objetivo</h2>
 <p>Según el plan definido en el post 00 de la serie lo primero que tenemos que conseguir es escanear toda nuestra bóveda de Obsidian para saber que archivos tenemos en ella.</p>
 <blockquote>
   <p>[!warning]<br />
   Tenemos que tener en cuenta que dentro de la bóveda se van a<br />
   encontrar archivos que no queremos escanear como la carpeta <code>.git</code></p>
 </blockquote>
-<h2 id="desarrollo">Desarrollo</h2>
+<h2 id="-desarrollo">## Desarrollo</h2>
 <p>Lo primero que vamos a realizar es crear una carpeta con el nombre de <code>publisher</code> en donde vamos a inicializar el proyecto de Deno.</p>
 <pre><code class="bash language-bash">mkdir publisher
 cd publisher
@@ -202,6 +209,11 @@ console.log(scanDirs("..", "boveda"));</code></pre>
 }</code></pre>
 <p>Con eso ya terminamos toda la función de escaneo de nuestro programa, podemos borrar todos los <code>console.log</code> de el y comenzar a pensar en la siguiente parte que es convertir nuestros post en archivos HTML.</p>
     </div>
-    <div class="footer"></div>
+    <div class="footer">
+      <!--
+      <a href="/" class="footer-left">Anterior</a>
+      <a href="/" class="footer-right">Siguiente</a>
+      -->
+    </div>
   </body>
 </html>

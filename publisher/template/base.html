@@ -10,9 +10,9 @@
     <!--SEO--
     <meta name="description" content="Este es mi blog">
     <meta name="keywords" content="HTML, CSS, JavaScript, TypeScript, tutorial">
-    <meta name="author" content="Mi nimbre">
-    <meta name="robots" content="index, follow">
     -->
+    <meta name="author" content="CoffeeBreak.inc">
+    <meta name="robots" content="index, follow">
 
     <!--Favicon-->
     <link
@@ -30,10 +30,17 @@
     -->
 
     <!--Estilos-->
+    {{#if prod }}
     <link
       rel="stylesheet"
       href="https://nicolas-sabbatini.github.io/assets/styles.css"
     >
+    {{else}}
+    <link
+      rel="stylesheet"
+      href="http://127.0.0.1:8000/assets/styles.css"
+    >
+    {{/if}}
 
     <!--Fuentes-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,9 +63,21 @@
     </script>
   </head>
   <body>
+    <div class="header">
+      <div class="header-left">
+        <a href="/" class="page-title">CoffeeBreak.inc</a>
+      </div>
+      <div class="header-center"></div>
+      <div class="header-right"></div>
+    </div>
     <div class="content">
       {{{content}}}
     </div>
-    <div class="footer"></div>
+    <div class="footer">
+      <!--
+      <a href="/" class="footer-left">Anterior</a>
+      <a href="/" class="footer-right">Siguiente</a>
+      -->
+    </div>
   </body>
 </html>
