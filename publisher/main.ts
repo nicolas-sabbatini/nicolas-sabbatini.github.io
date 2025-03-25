@@ -91,7 +91,6 @@ function scanDirs(path: string, name: string): Tree {
         });
       } else {
         const data = matter.read(`${path}/${dirEntry.name}`);
-        console.log(data.data);
         node.childrens!.push({
           name: dirEntry.name,
           path: `${path}/${dirEntry.name}`,
@@ -118,10 +117,6 @@ function createTreeOnFileSystem(tree: Tree, path: string) {
     return;
   } else if ("content" in tree) {
     const content = converter.makeHtml(tree.content);
-    console.log(tree.name, {
-      ...tree.metadata,
-      base_url: URL[SELECTED_URL],
-    });
     Deno.writeTextFileSync(
       `${path}/${tree.name.replace(".md", ".html")}`,
       template({ content, ...tree.metadata, base_url: URL[SELECTED_URL] }),
@@ -150,14 +145,17 @@ if (Deno.args[0] === "prod") {
 }
 
 buildWeb();
-const watcher = Deno.watchFs([".", VAULT_PATH], { recursive: true });
-for await (const event of watcher) {
-  if (
-    event.kind !== "any" && event.kind !== "other" && event.kind !== "access"
-  ) {
-    template = Handlebars.compile(
-      Deno.readTextFileSync("./template/base.html"),
-    );
-    buildWeb();
+
+if (Deno.args[0] !== "prod") {
+  const watcher = Deno.watchFs([".", VAULT_PATH], { recursive: true });
+  for await (const event of watcher) {
+    if (
+      event.kind !== "any" && event.kind !== "other" && event.kind !== "access"
+    ) {
+      template = Handlebars.compile(
+        Deno.readTextFileSync("./template/base.html"),
+      );
+      buildWeb();
+    }
   }
 }
