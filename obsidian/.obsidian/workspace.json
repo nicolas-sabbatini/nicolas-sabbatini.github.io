@@ -4,22 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "119182ceb9843f5f",
+        "id": "dc0f9ce156ab0f54",
         "type": "tabs",
         "children": [
           {
-            "id": "ba2fb629ed05a5ca",
+            "id": "3372eedae46c3e54",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "assets/MD to HTML test.md",
+                "file": "blog/creando_mi_propio_static_site_generator-05.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "MD to HTML test"
+              "title": "creando_mi_propio_static_site_generator-05"
             }
           }
         ]
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 207.5
+    "width": 200
   },
   "right": {
     "id": "3fd7a6a1179fd35c",
@@ -139,17 +139,31 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "ba2fb629ed05a5ca",
+  "active": "3372eedae46c3e54",
   "lastOpenFiles": [
+    "blog/creando_mi_propio_static_site_generator-04.md",
+    "blog/creando_mi_propio_static_site_generator-03.md",
+    "blog/creando_mi_propio_static_site_generator-01.md",
+    "blog/creando_mi_propio_static_site_generator-02.md",
+    "blog/creando_mi_propio_static_site_generator-00.md",
+    "blog/creando_mi_propio_static_site_generator-05.md",
+    "templates/Blog.md",
+    "noa",
+    "blog/index.md",
+    "templates",
+    "assets/Drawing 2025-03-24 01.39.45.excalidraw.md",
+    "assets/Drawing 2025-03-24 01.39.31.excalidraw.md",
+    "assets/MD to HTML test.md",
+    "Excalidraw/Drawing 2025-03-24 01.39.07.excalidraw.md",
+    "Excalidraw/Drawing 2025-03-24 01.38.52.excalidraw.md",
+    "Excalidraw",
+    "assets/markdown-to-html.md",
+    "assets/markdown-to-html.svg",
+    "Excalidraw/Drawing 2025-03-24 01.07.25.excalidraw.svg",
     "assets/favicon.svg",
     "index.md",
     "obsidian",
-    "blog/index.md",
     "blog.md",
-    "blog/creando_mi_propio_static_site_generator-01.md",
-    "blog/creando_mi_propio_static_site_generator-00.md",
-    "assets/MD to HTML test.md",
-    "blog/creando_mi_propio_static_site_generator-03.md",
     "assets/Logo 2.svg",
     "assets/styles.css",
     "docs/blog/creando_mi_propio_static_site_generator-01.html",
@@ -157,10 +171,6 @@
     "docs/blog/creando_mi_propio_static_site_generator-02.html",
     "docs/blog/index.html",
     "docs/blog/creando_mi_propio_static_site_generator-00.html",
-    "docs/blog",
-    "docs/assets/test.html",
-    "docs/assets/Untitled.html",
-    "blog/creando_mi_propio_static_site_generator-02.md",
     "Untitled.md",
     "assets/prueba.md",
     "assets/pagina_de_prueba.md",

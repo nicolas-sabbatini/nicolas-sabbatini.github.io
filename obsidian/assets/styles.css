@@ -105,6 +105,10 @@ body {
   padding: 1rem;
 }
 
+.footer-right {
+  margin-left: auto;
+}
+
 @media (max-width: 900px) {
   .content {
     max-width: 90%;

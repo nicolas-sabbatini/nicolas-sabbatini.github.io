@@ -1,3 +1,18 @@
+---
+anterior: 
+descripcion: Una serie de tutoriales en la cual construimos un static site generator.
+image: /assets/markdown-to-html.svg
+parent: BLOG
+parent_url: /blog
+siguiente: creando_mi_propio_static_site_generator-01.html
+tags:
+  - tutorial
+  - web
+  - html
+  - deno
+titulo: Creando mi propio static site generator - 00
+---
+
 # Creando mi propio Static Site Generator - 00
 
 ## Porque crear otro `Static site Generator`
@@ -28,7 +43,6 @@ La idea básica que tengo planeada es crear un programa que tome una bóveda de 
   2. Renderizar las páginas como HTML
   3. Insertar el HTML en templates
 - Parte 2
-  1. Leer metadata de las páginas
-  2. Añadir la metadata leída a los templates y otras paginas
+  1. Leer metadata de las páginas y añadir la metadata leída a los templates
 - Parte 3
   1. Añadir git submodules para comenzar a añadir proyectos públicos

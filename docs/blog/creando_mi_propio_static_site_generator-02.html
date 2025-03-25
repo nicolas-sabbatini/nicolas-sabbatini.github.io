@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--Título de la página-->
-    <title>Mi blog</title>
+    <title>Creando mi propio static site generator - 02</title>
 
-    <!--SEO--
-    <meta name="description" content="Este es mi blog">
-    <meta name="keywords" content="HTML, CSS, JavaScript, TypeScript, tutorial">
-    -->
-    <meta name="author" content="CoffeeBreak.inc">
+    <!--SEO-->
+    <meta name="description" content="Una serie de tutoriales en la cual construimos un static site generator.">
+    <meta name="keywords" content="tutorial, web, html, deno">
+    <meta name="author" content="CoffeeBreak">
     <meta name="robots" content="index, follow">
 
     <!--Favicon-->
@@ -21,13 +20,11 @@
       href="https://nicolas-sabbatini.github.io/assets/favicon.svg"
     >
 
-    <!--Tarjetas para redes sociales--
-    <meta property="og:title" content="Título para compartir en redes">
-    <meta property="og:description" content="Descripción en redes">
-    <meta property="og:image" content="https://ejemplo.com/imagen.jpg">
-    <meta property="og:url" content="https://ejemplo.com">
-    <meta name="twitter:card" content="summary_large_image">
-    -->
+    <!--Tarjetas para redes sociales-->
+    <meta property="og:title" content="Creando mi propio static site generator - 02">
+    <meta property="og:description" content="Una serie de tutoriales en la cual construimos un static site generator.">
+    <meta property="og:image" content="https://nicolas-sabbatini.github.io/assets/markdown-to-html.svg">
+    <meta property="og:url" content="https://nicolas-sabbatini.github.io/blog/creando_mi_propio_static_site_generator-02.html">
 
     <!--Estilos-->
     <link
@@ -58,9 +55,11 @@
   <body>
     <div class="header">
       <div class="header-left">
-        <a href="/" class="page-title">CoffeeBreak.inc</a>
+        <a href="/" class="page-title">CoffeeBreak</a>
       </div>
-      <div class="header-center"></div>
+      <div class="header-center">
+        <a href="https://nicolas-sabbatini.github.io/blog" class="page-title">BLOG</a>
+      </div>
       <div class="header-right"></div>
     </div>
     <div class="content">
@@ -147,10 +146,9 @@ const converter = new showdown.Converter({
 <p>Con estos cambios ya tenemos un static site generator sencillo que parsea nuestros post escritos en obsidian y los transforma en una página web estática la cual podemos ver desde el navegador, en el siguiente post vamos a meter el output en un template para que quede más bonita y no sea solo un texto básico.</p>
     </div>
     <div class="footer">
-      <!--
-      <a href="/" class="footer-left">Anterior</a>
-      <a href="/" class="footer-right">Siguiente</a>
-      -->
+      <a href="creando_mi_propio_static_site_generator-01.html" class="footer-left">Anterior</a>
+       
+      <a href="creando_mi_propio_static_site_generator-03.html" class="footer-right">Siguiente</a>
     </div>
   </body>
 </html>

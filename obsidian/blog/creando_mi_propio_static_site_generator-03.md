@@ -1,3 +1,18 @@
+---
+anterior: creando_mi_propio_static_site_generator-02.html
+descripcion: Una serie de tutoriales en la cual construimos un static site generator.
+image: /assets/markdown-to-html.svg
+parent: BLOG
+parent_url: /blog
+siguiente: creando_mi_propio_static_site_generator-04.html
+tags:
+  - tutorial
+  - web
+  - html
+  - deno
+titulo: Creando mi propio static site generator - 03
+---
+
 # Creando mi propio Static Site Generator - 03
 
 ## Que vamos a hacer

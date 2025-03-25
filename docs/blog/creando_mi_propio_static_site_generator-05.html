@@ -1,0 +1,112 @@
+<html lang="es-AR">
+  <head>
+    <!--Meta data de render-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Título de la página-->
+    <title>Creando mi propio static site generator - 05</title>
+
+    <!--SEO-->
+    <meta name="description" content="Una serie de tutoriales en la cual construimos un static site generator.">
+    <meta name="keywords" content="tutorial, web, html, deno">
+    <meta name="author" content="CoffeeBreak">
+    <meta name="robots" content="index, follow">
+
+    <!--Favicon-->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://nicolas-sabbatini.github.io/assets/favicon.svg"
+    >
+
+    <!--Tarjetas para redes sociales-->
+    <meta property="og:title" content="Creando mi propio static site generator - 05">
+    <meta property="og:description" content="Una serie de tutoriales en la cual construimos un static site generator.">
+    <meta property="og:image" content="https://nicolas-sabbatini.github.io/assets/markdown-to-html.svg">
+    <meta property="og:url" content="https://nicolas-sabbatini.github.io/blog/creando_mi_propio_static_site_generator-05.html">
+
+    <!--Estilos-->
+    <link
+      rel="stylesheet"
+      href="https://nicolas-sabbatini.github.io/assets/styles.css"
+    >
+
+    <!--Fuentes-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    >
+
+    <!--Highlig.js-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/gruvbox-dark-hard.min.css"
+    >
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+    ></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <a href="/" class="page-title">CoffeeBreak</a>
+      </div>
+      <div class="header-center">
+        <a href="https://nicolas-sabbatini.github.io/blog" class="page-title">BLOG</a>
+      </div>
+      <div class="header-right"></div>
+    </div>
+    <div class="content">
+      <h1 id="-creando-mi-propio-static-site-generator---05"># Creando mi propio Static Site Generator - 05</h1>
+<p>Este es un post extra hablando de algunas cosas que no estaban planeadas para crear el Static Site Generator, pero que mejoran la <code>developer experience</code>.</p>
+<h2 id="-seleccionar-url-base">## Seleccionar URL base</h2>
+<p>Al probar los templates y estilos de forma local, es necesario que los headers de estilos apunten a una URL local. Sin embargo, en la versión final, deben apuntar a la URL de nuestra Web. </p>
+<p>Para evitar modificar manualmente el template según el entorno, añadí la opción de ejecutar el programa con un flag que determina si se debe usar la URL local o la de la Web.</p>
+<pre><code class="ts language-ts">// main.ts
+const URL = [
+  "http://127.0.0.1:8000", // URL local
+  "https://nicolas-sabbatini.github.io", // WEB
+];
+let SELECTED_URL = 0; // Por defecto siempre se apunta a local
+if (Deno.args[0] === "prod") {
+  SELECTED_URL = 1;
+}
+
+/*
+    Se omite mucho código
+*/
+
+// Cuando se ejecuta el template
+template({ content, base_url: URL[SELECTED_URL] }),</code></pre>
+<pre><code class="html language-html">    &lt;!--Template--&gt;
+    &lt;link
+      rel="stylesheet"
+      href="{{base_url}}/assets/styles.css"
+    &gt;</code></pre>
+<h2 id="-hot-reloading">## Hot Reloading</h2>
+<p>Al probar los templates y estilos de forma local era necesario volver a ejecutar el builder manualmente para ver las modificaciones en los archivos finales.  </p>
+<p>Para evitar esto, creé una pequeña función que utiliza <a href="https://docs.deno.com/api/deno/~/Deno.watchFs">Deno.watchFs</a> para detectar cambios en la bóveda, los templates y estilos, y reejecutar automáticamente el builder, asegurando que siempre tengamos disponible la version más reciente de nuestra Web.</p>
+<pre><code class="ts language-ts">buildWeb();
+const watcher = Deno.watchFs([".", VAULT_PATH], { recursive: true });
+for await (const event of watcher) {
+  if (
+    event.kind !== "any" &amp;&amp; event.kind !== "other" &amp;&amp; event.kind !== "access"
+  ) {
+    template = Handlebars.compile(
+      Deno.readTextFileSync("./template/base.html"),
+    );
+    buildWeb();
+  }
+}</code></pre>
+    </div>
+    <div class="footer">
+      <a href="creando_mi_propio_static_site_generator-04.html" class="footer-left">Anterior</a>
+           </div>
+  </body>
+</html>

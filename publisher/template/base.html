@@ -5,42 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--Título de la página-->
-    <title>Mi blog</title>
+    <title>{{titulo}}</title>
 
-    <!--SEO--
-    <meta name="description" content="Este es mi blog">
-    <meta name="keywords" content="HTML, CSS, JavaScript, TypeScript, tutorial">
-    -->
-    <meta name="author" content="CoffeeBreak.inc">
+    <!--SEO-->
+    <meta name="description" content="{{descripcion}}">
+    <meta name="keywords" content="{{tags}}">
+    <meta name="author" content="CoffeeBreak">
     <meta name="robots" content="index, follow">
 
     <!--Favicon-->
     <link
       rel="icon"
       type="image/svg+xml"
-      href="https://nicolas-sabbatini.github.io/assets/favicon.svg"
+      href="{{base_url}}/assets/favicon.svg"
     >
 
-    <!--Tarjetas para redes sociales--
-    <meta property="og:title" content="Título para compartir en redes">
-    <meta property="og:description" content="Descripción en redes">
-    <meta property="og:image" content="https://ejemplo.com/imagen.jpg">
-    <meta property="og:url" content="https://ejemplo.com">
-    <meta name="twitter:card" content="summary_large_image">
-    -->
+    <!--Tarjetas para redes sociales-->
+    <meta property="og:title" content="{{titulo}}">
+    <meta property="og:description" content="{{descripcion}}">
+    <meta property="og:image" content="{{base_url}}{{image}}">
+    <meta property="og:url" content="{{base_url}}{{path}}">
 
     <!--Estilos-->
-    {{#if prod }}
     <link
       rel="stylesheet"
-      href="https://nicolas-sabbatini.github.io/assets/styles.css"
+      href="{{base_url}}/assets/styles.css"
     >
-    {{else}}
-    <link
-      rel="stylesheet"
-      href="http://127.0.0.1:8000/assets/styles.css"
-    >
-    {{/if}}
 
     <!--Fuentes-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,19 +55,22 @@
   <body>
     <div class="header">
       <div class="header-left">
-        <a href="/" class="page-title">CoffeeBreak.inc</a>
+        <a href="/" class="page-title">CoffeeBreak</a>
       </div>
-      <div class="header-center"></div>
+      <div class="header-center">
+        <a href="{{base_url}}{{parent_url}}" class="page-title">{{parent}}</a>
+      </div>
       <div class="header-right"></div>
     </div>
     <div class="content">
       {{{content}}}
     </div>
     <div class="footer">
-      <!--
-      <a href="/" class="footer-left">Anterior</a>
-      <a href="/" class="footer-right">Siguiente</a>
-      -->
+      {{#if anterior}}
+      <a href="{{anterior}}" class="footer-left">Anterior</a>
+      {{/if}} {{#if siguiente}}
+      <a href="{{siguiente}}" class="footer-right">Siguiente</a>
+      {{/if}}
     </div>
   </body>
 </html>
