@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "dc0f9ce156ab0f54",
+        "id": "73ed4f820722f0b5",
         "type": "tabs",
         "children": [
           {
-            "id": "3372eedae46c3e54",
+            "id": "76b9eb5644e1ad44",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -139,13 +139,15 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "3372eedae46c3e54",
+  "active": "76b9eb5644e1ad44",
   "lastOpenFiles": [
     "blog/creando_mi_propio_static_site_generator-04.md",
     "blog/creando_mi_propio_static_site_generator-03.md",
-    "blog/creando_mi_propio_static_site_generator-01.md",
     "blog/creando_mi_propio_static_site_generator-02.md",
+    "blog/creando_mi_propio_static_site_generator-01.md",
     "blog/creando_mi_propio_static_site_generator-00.md",
+    "assets/markdown-to-html.png",
+    "assets/markdown-to-html.md",
     "blog/creando_mi_propio_static_site_generator-05.md",
     "templates/Blog.md",
     "noa",
@@ -157,7 +159,6 @@
     "Excalidraw/Drawing 2025-03-24 01.39.07.excalidraw.md",
     "Excalidraw/Drawing 2025-03-24 01.38.52.excalidraw.md",
     "Excalidraw",
-    "assets/markdown-to-html.md",
     "assets/markdown-to-html.svg",
     "Excalidraw/Drawing 2025-03-24 01.07.25.excalidraw.svg",
     "assets/favicon.svg",

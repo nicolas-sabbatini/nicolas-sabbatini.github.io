@@ -1,3 +1,15 @@
+---
+anterior:
+descripcion: El blog de un desarrollador feliz.
+image:
+parent: HOME
+parent_url:
+siguiente:
+tags:
+  - blog
+titulo: Blog
+---
+
 # Blog
 
 ## Posts
