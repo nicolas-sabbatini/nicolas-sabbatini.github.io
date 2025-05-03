@@ -17,11 +17,14 @@ titulo: Creando mi propio static site generator - 03
 
 ## Que vamos a hacer
 
-Ya tenemos el HTML de nuestros post ahora le tenemos que dar vida con un poco de CSS y un template para que todos tengan la misma estructura.
+Ya tenemos el HTML de nuestros post ahora le tenemos que dar vida con un poco de
+CSS y un template para que todos tengan la misma estructura.
 
 ## Desarrollo
 
-Para utilizar los templates vamos a instalar [Handlebars.js](https://handlebarsjs.com) que es un template engine mínimo en nuestro proyecto de Deno corriendo el siguiente comando.
+Para utilizar los templates vamos a instalar
+[Handlebars.js](https://handlebarsjs.com) que es un template engine mínimo en
+nuestro proyecto de Deno corriendo el siguiente comando.
 
 ```bash
 deno install npm:handlebars
@@ -33,7 +36,8 @@ Y luego lo importamos en nuestro `main.ts`.
 import Handlebars from "handlebars";
 ```
 
-Creamos una carpeta donde vamos a guardar los templates dentro de nuestro proyecto de Deno y creamos un template simple.
+Creamos una carpeta donde vamos a guardar los templates dentro de nuestro
+proyecto de Deno y creamos un template simple.
 
 ```html
 <html lang="es-AR">
@@ -80,7 +84,8 @@ Creamos una carpeta donde vamos a guardar los templates dentro de nuestro proyec
 ```
 
 > [!NOTE]
-> Los headers de ese template son ejemplos y vas a tener que codificarlos según corresponda
+> Los headers de ese template son ejemplos y vas a tener que codificarlos según
+> corresponda
 
 Ahora al comienzo de nuestro programa cargamos el template.
 
@@ -90,7 +95,8 @@ const template = Handlebars.compile(
 );
 ```
 
-Y volvemos a modificar la función que crea los archivos, para que ejecute el template y con el resultado cree el archivo.
+Y volvemos a modificar la función que crea los archivos, para que ejecute el
+template y con el resultado cree el archivo.
 
 ```ts
 function createTreeOnFileSystem(tree: Tree, path: string) {
@@ -115,4 +121,5 @@ function createTreeOnFileSystem(tree: Tree, path: string) {
 }
 ```
 
-Con estos cambios ya completamos el MVP de nuestro blog, ahora solo queda escribir posts y publicar.
+Con estos cambios ya completamos el MVP de nuestro blog, ahora solo queda
+escribir posts y publicar.

@@ -74,15 +74,26 @@
     <div class="content">
       <h1 id="-creando-mi-propio-static-site-generator---04"># Creando mi propio Static Site Generator - 04</h1>
 <h2 id="-que-vamos-a-hacer">## Que vamos a hacer</h2>
-<p>Ya tenemos nuestro mínimo Static Site Generator, capaz de publicar posts, imágenes, etc. Sin embargo, hay un pequeño detalle: las páginas generadas no contienen suficiente información para que los indexadores Web comprendan su contenido y optimicen el SEO.  </p>
-<p>Además, si compartimos un enlace a nuestros posts en una red social, este aparecerá como un simple link sin vista previa. </p>
-<p>Para solucionar esto, añadiremos un header en YAML a cada post, donde almacenaremos toda la metadata necesaria. Luego, pasaremos esta información a los templates y así solucionar nuestro pequeño problema.</p>
+<p>Ya tenemos nuestro mínimo Static Site Generator, capaz de publicar posts,
+imágenes, etc. Sin embargo, hay un pequeño detalle: las páginas generadas no
+contienen suficiente información para que los indexadores Web comprendan su
+contenido y optimicen el SEO.</p>
+<p>Además, si compartimos un enlace a nuestros posts en una red social, este
+aparecerá como un simple link sin vista previa.</p>
+<p>Para solucionar esto, añadiremos un header en YAML a cada post, donde
+almacenaremos toda la metadata necesaria. Luego, pasaremos esta información a
+los templates y así solucionar nuestro pequeño problema.</p>
 <h2 id="-desarrollo">## Desarrollo</h2>
-<p>Para leer la metadata de los post, vamos a utilizar la librería <a href="https://github.com/jonschlinkert/gray-matter">gray-matter</a> para instalarla simplemente corremos el comando.</p>
+<p>Para leer la metadata de los post, vamos a utilizar la librería
+<a href="https://github.com/jonschlinkert/gray-matter">gray-matter</a> para instalarla
+simplemente corremos el comando.</p>
 <pre><code class="bash language-bash">deno install npm:gray-matter</code></pre>
 <p>E importamos la librería.</p>
 <pre><code class="ts language-ts">import matter from "gray-matter";</code></pre>
-<p>Y vamos a modificar nuestra estructura de datos <code>Tree</code> para que contenga 3 tipos de archivos, un archivo simple el cual tiene que solo ser copiado en nuestra carpeta output, un directorio que tiene que ser creado y un post el cual contiene metadata.</p>
+<p>Y vamos a modificar nuestra estructura de datos <code>Tree</code> para que contenga 3 tipos
+de archivos, un archivo simple el cual tiene que solo ser copiado en nuestra
+carpeta output, un directorio que tiene que ser creado y un post el cual
+contiene metadata.</p>
 <pre><code class="ts language-ts">interface TreeSimpleFile {
   name: string;
   path: string;
@@ -98,7 +109,9 @@ interface TreeMetadata extends TreeSimpleFile {
 }
 
 type Tree = TreeSimpleFile | TreeDir | TreeMetadata;</code></pre>
-<p>Ahora modificamos la función que crea nuestro árbol, para que en el caso de que no sea un directorio y sea un archivo con metadata podemos crear la estructura correcta.</p>
+<p>Ahora modificamos la función que crea nuestro árbol, para que en el caso de que
+no sea un directorio y sea un archivo con metadata podemos crear la estructura
+correcta.</p>
 <pre><code class="ts language-ts">function scanDirs(path: string, name: string): Tree {
   const node: Tree = { name, path, childrens: [] };
   for (const dirEntry of Deno.readDirSync(path)) {
@@ -139,18 +152,31 @@ type Tree = TreeSimpleFile | TreeDir | TreeMetadata;</code></pre>
     const content = converter.makeHtml(tree.content);
     Deno.writeTextFileSync(
       `${path}/${tree.name.replace(".md", ".html")}`,
-      template({ content, ...tree.metadatad}),
+      template({ content, ...tree.metadatad }),
     );
   } else {
     Deno.copyFileSync(tree.path, `${path}/${tree.name}`);
   }
 }</code></pre>
-<p>Con ese último cambio, solo tenemos que modificar los templates para que utilicen toda la metadata que añadamos a nuestras páginas en Obsidian. La guía oficial de Obsidian explica en detalle como hacerlo <a href="https://notes.nicolevanderhoeven.com/obsidian-playbook/Using+Obsidian/03+Linking+and+organizing/YAML+Frontmatter">link</a>).</p>
-<p>Ahora, nuestro Static Site Generator cuenta con todas las funcionalidades que ofrecen otros generadores del mercado. Tenemos <strong>optimización SEO, creación de posts en Markdown y vista previa de enlaces</strong>, con la ventaja de que si queremos añadir cualquier otra funcionalidad tenemos el conocimiento para realizarlo. </p>
-<p>Una buena tarea sería aplicar un template distinto según la metadata de cada página. En mi caso eso escapa de lo que me propuse inicialmente.</p>
-<p>El objetivo de añadir git submodules para publicar otros repositorios va a quedar pendiente para el futuro. </p>
-<p>Por ahora, estoy contento con el pequeño proyecto que realizamos y espero que hayan aprendido algo. Cualquier duda o sugerencia los <a href="https://github.com/nicolas-sabbatini/nicolas-sabbatini.github.io/issues">issues de GitHub</a> están disponibles.</p>
-<p><strong>PD</strong>: Voy a publicar otro post con algunos cambios extras los cuales mejoran la developer experience al modificar los templates y el contenido de nuestra Web.</p>
+<p>Con ese último cambio, solo tenemos que modificar los templates para que
+utilicen toda la metadata que añadamos a nuestras páginas en Obsidian. La guía
+oficial de Obsidian explica en detalle como hacerlo
+<a href="https://notes.nicolevanderhoeven.com/obsidian-playbook/Using+Obsidian/03+Linking+and+organizing/YAML+Frontmatter">link</a>).</p>
+<p>Ahora, nuestro Static Site Generator cuenta con todas las funcionalidades que
+ofrecen otros generadores del mercado. Tenemos <strong>optimización SEO, creación de
+posts en Markdown y vista previa de enlaces</strong>, con la ventaja de que si queremos
+añadir cualquier otra funcionalidad tenemos el conocimiento para realizarlo.</p>
+<p>Una buena tarea sería aplicar un template distinto según la metadata de cada
+página. En mi caso eso escapa de lo que me propuse inicialmente.</p>
+<p>El objetivo de añadir git submodules para publicar otros repositorios va a
+quedar pendiente para el futuro.</p>
+<p>Por ahora, estoy contento con el pequeño proyecto que realizamos y espero que
+hayan aprendido algo. Cualquier duda o sugerencia los
+<a href="https://github.com/nicolas-sabbatini/nicolas-sabbatini.github.io/issues">issues de GitHub</a>
+están disponibles.</p>
+<p><strong>PD</strong>: Voy a publicar otro post con algunos cambios extras los cuales mejoran
+la developer experience al modificar los templates y el contenido de nuestra
+Web.</p>
     </div>
     <div class="footer">
       <a href="creando_mi_propio_static_site_generator-03.html" class="footer-left">Anterior</a>

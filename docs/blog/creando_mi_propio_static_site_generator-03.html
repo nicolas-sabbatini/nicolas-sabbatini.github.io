@@ -74,13 +74,17 @@
     <div class="content">
       <h1 id="-creando-mi-propio-static-site-generator---03"># Creando mi propio Static Site Generator - 03</h1>
 <h2 id="-que-vamos-a-hacer">## Que vamos a hacer</h2>
-<p>Ya tenemos el HTML de nuestros post ahora le tenemos que dar vida con un poco de CSS y un template para que todos tengan la misma estructura.</p>
+<p>Ya tenemos el HTML de nuestros post ahora le tenemos que dar vida con un poco de
+CSS y un template para que todos tengan la misma estructura.</p>
 <h2 id="-desarrollo">## Desarrollo</h2>
-<p>Para utilizar los templates vamos a instalar <a href="https://handlebarsjs.com">Handlebars.js</a> que es un template engine mínimo en nuestro proyecto de Deno corriendo el siguiente comando.</p>
+<p>Para utilizar los templates vamos a instalar
+<a href="https://handlebarsjs.com">Handlebars.js</a> que es un template engine mínimo en
+nuestro proyecto de Deno corriendo el siguiente comando.</p>
 <pre><code class="bash language-bash">deno install npm:handlebars</code></pre>
 <p>Y luego lo importamos en nuestro <code>main.ts</code>.</p>
 <pre><code class="ts language-ts">import Handlebars from "handlebars";</code></pre>
-<p>Creamos una carpeta donde vamos a guardar los templates dentro de nuestro proyecto de Deno y creamos un template simple.</p>
+<p>Creamos una carpeta donde vamos a guardar los templates dentro de nuestro
+proyecto de Deno y creamos un template simple.</p>
 <pre><code class="html language-html">&lt;html lang="es-AR"&gt;
   &lt;head&gt;
     &lt;!--Meta data de render--&gt;
@@ -123,14 +127,16 @@
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <blockquote>
-  <p>[!NOTE]<br />
-  Los headers de ese template son ejemplos y vas a tener que codificarlos según corresponda</p>
+  <p>[!NOTE]
+  Los headers de ese template son ejemplos y vas a tener que codificarlos según
+  corresponda</p>
 </blockquote>
 <p>Ahora al comienzo de nuestro programa cargamos el template.</p>
 <pre><code class="ts language-ts">const template = Handlebars.compile(
   Deno.readTextFileSync("./template/base.html"),
 );</code></pre>
-<p>Y volvemos a modificar la función que crea los archivos, para que ejecute el template y con el resultado cree el archivo.</p>
+<p>Y volvemos a modificar la función que crea los archivos, para que ejecute el
+template y con el resultado cree el archivo.</p>
 <pre><code class="ts language-ts">function createTreeOnFileSystem(tree: Tree, path: string) {
   if (tree.childrens) {
     Deno.mkdirSync(`${path}/${tree.name}`);
@@ -151,7 +157,8 @@
     );
   }
 }</code></pre>
-<p>Con estos cambios ya completamos el MVP de nuestro blog, ahora solo queda escribir posts y publicar.</p>
+<p>Con estos cambios ya completamos el MVP de nuestro blog, ahora solo queda
+escribir posts y publicar.</p>
     </div>
     <div class="footer">
       <a href="creando_mi_propio_static_site_generator-02.html" class="footer-left">Anterior</a>

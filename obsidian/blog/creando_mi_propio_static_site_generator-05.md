@@ -4,7 +4,7 @@ descripcion: Una serie de tutoriales en la cual construimos un static site gener
 image: /assets/markdown-to-html.png
 parent: BLOG
 parent_url: /blog
-siguiente: 
+siguiente:
 tags:
   - tutorial
   - web
@@ -15,13 +15,18 @@ titulo: Creando mi propio static site generator - 05
 
 # Creando mi propio Static Site Generator - 05
 
-Este es un post extra hablando de algunas cosas que no estaban planeadas para crear el Static Site Generator, pero que mejoran la `developer experience`.
+Este es un post extra hablando de algunas cosas que no estaban planeadas para
+crear el Static Site Generator, pero que mejoran la `developer experience`.
 
 ## Seleccionar URL base
 
-Al probar los templates y estilos de forma local, es necesario que los headers de estilos apunten a una URL local. Sin embargo, en la versión final, deben apuntar a la URL de nuestra Web. 
+Al probar los templates y estilos de forma local, es necesario que los headers
+de estilos apunten a una URL local. Sin embargo, en la versión final, deben
+apuntar a la URL de nuestra Web.
 
-Para evitar modificar manualmente el template según el entorno, añadí la opción de ejecutar el programa con un flag que determina si se debe usar la URL local o la de la Web.
+Para evitar modificar manualmente el template según el entorno, añadí la opción
+de ejecutar el programa con un flag que determina si se debe usar la URL local o
+la de la Web.
 
 ```ts
 // main.ts
@@ -43,18 +48,23 @@ template({ content, base_url: URL[SELECTED_URL] }),
 ```
 
 ```html
-    <!--Template-->
-    <link
-      rel="stylesheet"
-      href="{{base_url}}/assets/styles.css"
-    >
+<!--Template-->
+<link
+  rel="stylesheet"
+  href="{{base_url}}/assets/styles.css"
+>
 ```
 
 ## Hot Reloading
 
-Al probar los templates y estilos de forma local era necesario volver a ejecutar el builder manualmente para ver las modificaciones en los archivos finales.  
+Al probar los templates y estilos de forma local era necesario volver a ejecutar
+el builder manualmente para ver las modificaciones en los archivos finales.
 
-Para evitar esto, creé una pequeña función que utiliza [Deno.watchFs](https://docs.deno.com/api/deno/~/Deno.watchFs) para detectar cambios en la bóveda, los templates y estilos, y reejecutar automáticamente el builder, asegurando que siempre tengamos disponible la version más reciente de nuestra Web.
+Para evitar esto, creé una pequeña función que utiliza
+[Deno.watchFs](https://docs.deno.com/api/deno/~/Deno.watchFs) para detectar
+cambios en la bóveda, los templates y estilos, y reejecutar automáticamente el
+builder, asegurando que siempre tengamos disponible la version más reciente de
+nuestra Web.
 
 ```ts
 buildWeb();

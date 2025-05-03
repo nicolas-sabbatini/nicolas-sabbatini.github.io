@@ -73,10 +73,15 @@
     </div>
     <div class="content">
       <h1 id="-creando-mi-propio-static-site-generator---05"># Creando mi propio Static Site Generator - 05</h1>
-<p>Este es un post extra hablando de algunas cosas que no estaban planeadas para crear el Static Site Generator, pero que mejoran la <code>developer experience</code>.</p>
+<p>Este es un post extra hablando de algunas cosas que no estaban planeadas para
+crear el Static Site Generator, pero que mejoran la <code>developer experience</code>.</p>
 <h2 id="-seleccionar-url-base">## Seleccionar URL base</h2>
-<p>Al probar los templates y estilos de forma local, es necesario que los headers de estilos apunten a una URL local. Sin embargo, en la versión final, deben apuntar a la URL de nuestra Web. </p>
-<p>Para evitar modificar manualmente el template según el entorno, añadí la opción de ejecutar el programa con un flag que determina si se debe usar la URL local o la de la Web.</p>
+<p>Al probar los templates y estilos de forma local, es necesario que los headers
+de estilos apunten a una URL local. Sin embargo, en la versión final, deben
+apuntar a la URL de nuestra Web.</p>
+<p>Para evitar modificar manualmente el template según el entorno, añadí la opción
+de ejecutar el programa con un flag que determina si se debe usar la URL local o
+la de la Web.</p>
 <pre><code class="ts language-ts">// main.ts
 const URL = [
   "http://127.0.0.1:8000", // URL local
@@ -93,14 +98,19 @@ if (Deno.args[0] === "prod") {
 
 // Cuando se ejecuta el template
 template({ content, base_url: URL[SELECTED_URL] }),</code></pre>
-<pre><code class="html language-html">    &lt;!--Template--&gt;
-    &lt;link
-      rel="stylesheet"
-      href="{{base_url}}/assets/styles.css"
-    &gt;</code></pre>
+<pre><code class="html language-html">&lt;!--Template--&gt;
+&lt;link
+  rel="stylesheet"
+  href="{{base_url}}/assets/styles.css"
+&gt;</code></pre>
 <h2 id="-hot-reloading">## Hot Reloading</h2>
-<p>Al probar los templates y estilos de forma local era necesario volver a ejecutar el builder manualmente para ver las modificaciones en los archivos finales.  </p>
-<p>Para evitar esto, creé una pequeña función que utiliza <a href="https://docs.deno.com/api/deno/~/Deno.watchFs">Deno.watchFs</a> para detectar cambios en la bóveda, los templates y estilos, y reejecutar automáticamente el builder, asegurando que siempre tengamos disponible la version más reciente de nuestra Web.</p>
+<p>Al probar los templates y estilos de forma local era necesario volver a ejecutar
+el builder manualmente para ver las modificaciones en los archivos finales.</p>
+<p>Para evitar esto, creé una pequeña función que utiliza
+<a href="https://docs.deno.com/api/deno/~/Deno.watchFs">Deno.watchFs</a> para detectar
+cambios en la bóveda, los templates y estilos, y reejecutar automáticamente el
+builder, asegurando que siempre tengamos disponible la version más reciente de
+nuestra Web.</p>
 <pre><code class="ts language-ts">buildWeb();
 const watcher = Deno.watchFs([".", VAULT_PATH], { recursive: true });
 for await (const event of watcher) {

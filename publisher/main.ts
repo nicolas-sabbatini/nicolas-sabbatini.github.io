@@ -51,6 +51,18 @@ const converter = new showdown.Converter({
         return hashes + " " + hashes + " " + title; // Adds an extra hash after the first hash
       },
     },
+    {
+      type: "output",
+      filter: function (text) {
+        return text.replace(
+          /<p\b[^>]*>(.*?)<\/p>/gis,
+          (_, innerContent) => {
+            const cleanedContent = innerContent.replace(/<br\s*\/?>/gi, "");
+            return `<p>${cleanedContent}</p>`;
+          },
+        );
+      },
+    },
   ],
 });
 
