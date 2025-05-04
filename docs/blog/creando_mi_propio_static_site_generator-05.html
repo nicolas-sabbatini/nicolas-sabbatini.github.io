@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es-AR">
   <head>
     <!--Meta data de render-->
@@ -54,9 +55,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/gruvbox-dark-hard.min.css"
     >
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
-    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>
       hljs.highlightAll();
     </script>
@@ -73,18 +72,19 @@
     </div>
     <div class="content">
       <h1 id="-creando-mi-propio-static-site-generator---05"># Creando mi propio Static Site Generator - 05</h1>
-<p>Este es un post extra hablando de algunas cosas que no estaban planeadas para
-crear el Static Site Generator, pero que mejoran la <code>developer experience</code>.</p>
+<p>Este es un post extra hablando de algunas funciones que no estaban planeadas
+para crear el Static Site Generator, pero que mejoran la <code>developer experience</code>
+y la experiencia de los usuarios.</p>
 <h2 id="-seleccionar-url-base">## Seleccionar URL base</h2>
 <p>Al probar los templates y estilos de forma local, es necesario que los headers
-de estilos apunten a una URL local. Sin embargo, en la versión final, deben
-apuntar a la URL de nuestra Web.</p>
+de estilos apunten a una URL local (o hacer un cambio de CORS). Sin embargo, en
+la versión final, deben apuntar a la URL de nuestra Web.</p>
 <p>Para evitar modificar manualmente el template según el entorno, añadí la opción
 de ejecutar el programa con un flag que determina si se debe usar la URL local o
 la de la Web.</p>
 <pre><code class="ts language-ts">// main.ts
 const URL = [
-  "http://127.0.0.1:8000", // URL local
+  "http://nicolas-sabbatini.github.io", // URL local
   "https://nicolas-sabbatini.github.io", // WEB
 ];
 let SELECTED_URL = 0; // Por defecto siempre se apunta a local
@@ -123,6 +123,124 @@ for await (const event of watcher) {
     buildWeb();
   }
 }</code></pre>
+<h2 id="-git-hooks">## Git hooks</h2>
+<p>Al poder cambiar dinámicamente la URL de estilos se abre la posibilidad de que
+al finalizar con las modificaciones de nuestra WEB, nos olvidemos de buildear
+nuestro proyecto o nos olvidemos de utilizar las flags correctas en dicho
+proceso.</p>
+<p>Para evitar esto tenemos 2 opciones, utilizar <code>GitHub actions</code> o algún servicio
+parecido para construir nuestra WEB en la <code>"nube"</code> o crear un
+<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git hook</a>.</p>
+<p>Como este es un proyecto chico y solo yo voy a estar modificando el repositorio
+voy a estar optando por la segada opción.</p>
+<p>Para esto simplemente creamos un archivo llamado <code>pre-commit</code> dentro del
+directorio <code>.git/hooks</code>, en el podemos escribir comandos arbitrario que Git va a
+ejecutar antes de realizar la acción de <code>commit</code>.</p>
+<p>Para nuestro proyecto los siguientes comandos es suficiente.</p>
+<pre><code class="bash language-bash"># # Seleccionamos la shell para ejecutar nuestros comandos
+#!/bin/sh
+
+# # Nos movemos al directorio de nuestro publisher
+cd publisher
+# # Ejecutamos nuestro proyecto de DENO con las variables correctas
+deno run --allow-all main.ts prod
+# # Volvemos a la carpeta anterior
+cd ..
+# # Añadimos nuestra el directorio de salida al commit
+git add docs
+return 0</code></pre>
+<h2 id="-404">## 404</h2>
+<p>Si algún usuario intenta acceder a una página que no existe dentro de nuestra
+web este se va a encontrar con la pantalla de error 404 genérica de GitHub.</p>
+<p><img src="../assets/404.png" alt="404" /></p>
+<p>Para crear nuestra propia página de error 404, tenemos que crear en el
+directorio de nuestro blog un archivo llamado <code>404.html</code>, y en el escribir el
+coódigo de nuestra página.</p>
+<pre><code class="html language-html">&lt;html lang="es-AR"&gt;
+  &lt;head&gt;
+    &lt;!--Meta data de render--&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+
+    &lt;!--Título de la página--&gt;
+    &lt;title&gt;404 Upss&lt;/title&gt;
+
+    &lt;!--SEO--&gt;
+    &lt;meta
+      name="description"
+      content="Upssss..."
+    &gt;
+    &lt;meta name="keywords" content="404"&gt;
+    &lt;meta name="author" content="CoffeeBreak"&gt;
+    &lt;meta name="robots" content="index, follow"&gt;
+
+    &lt;!--Favicon--&gt;
+    &lt;link
+      rel="icon"
+      type="image/svg+xml"
+      href="http://nicolas-sabbatini.github.io/assets/favicon.svg"
+    &gt;
+
+    &lt;!--Tarjetas para redes sociales--&gt;
+    &lt;meta
+      property="og:title"
+      content="404 - Upssss..."
+    &gt;
+    &lt;meta
+      property="og:description"
+      content="Está página no existe ¿Sera algo temporal o permanente?."
+    &gt;
+    &lt;meta
+      property="og:url"
+      content="http://nicolas-sabbatini.github.io/404.html"
+    &gt;
+    &lt;meta property="og:type" content="website"&gt;
+
+    &lt;meta name="twitter:card" content="summary_large_image"&gt;
+    &lt;meta
+      name="twitter:title"
+      content="404 - Upssss..."
+    &gt;
+    &lt;meta
+      name="twitter:description"
+      content="Está página no existe ¿Sera algo temporal o permanente?."
+    &gt;
+
+    &lt;!--Estilos--&gt;
+    &lt;link
+      rel="stylesheet"
+      href="http://nicolas-sabbatini.github.io/assets/styles.css"
+    &gt;
+
+    &lt;!--Fuentes--&gt;
+    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+    &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""&gt;
+    &lt;link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&amp;amp;display=swap"
+      rel="stylesheet"
+    &gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class="header"&gt;
+      &lt;div class="header-left"&gt;
+        &lt;a href="/" class="page-title"&gt;CoffeeBreak&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class="header-center"&gt;
+        &lt;a href="http://nicolas-sabbatini.github.io/blog" class="page-title"
+        &gt;404&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class="header-right"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="content"&gt;
+      &lt;h1&gt;
+        404 - Upssss...
+      &lt;/h1&gt;
+      &lt;div class="footer"&gt;
+        &lt;a href="javascript:history.back()" class="footer-left"&gt;Volver&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
     </div>
     <div class="footer">
       <a href="creando_mi_propio_static_site_generator-04.html" class="footer-left">Anterior</a>

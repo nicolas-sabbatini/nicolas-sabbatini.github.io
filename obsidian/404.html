@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+  <head>
+    <!--Meta data de render-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Título de la página-->
+    <title>404 Upss</title>
+
+    <!--SEO-->
+    <meta
+      name="description"
+      content="Upssss..."
+    >
+    <meta name="keywords" content="404">
+    <meta name="author" content="CoffeeBreak">
+    <meta name="robots" content="index, follow">
+
+    <!--Favicon-->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="http://nicolas-sabbatini.github.io/assets/favicon.svg"
+    >
+
+    <!--Tarjetas para redes sociales-->
+    <meta
+      property="og:title"
+      content="404 - Upssss..."
+    >
+    <meta
+      property="og:description"
+      content="Está página no existe ¿Sera algo temporal o permanente?."
+    >
+    <meta
+      property="og:url"
+      content="http://nicolas-sabbatini.github.io/404.html"
+    >
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta
+      name="twitter:title"
+      content="404 - Upssss..."
+    >
+    <meta
+      name="twitter:description"
+      content="Está página no existe ¿Sera algo temporal o permanente?."
+    >
+
+    <!--Estilos-->
+    <link
+      rel="stylesheet"
+      href="http://nicolas-sabbatini.github.io/assets/styles.css"
+    >
+
+    <!--Fuentes-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&amp;display=swap"
+      rel="stylesheet"
+    >
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <a href="/" class="page-title">CoffeeBreak</a>
+      </div>
+      <div class="header-center">
+        <p class="fake-title">404</p>
+      </div>
+      <div class="header-right"></div>
+    </div>
+    <div class="content">
+      <h1>
+        404 -
+      </h1>
+      <div id="chiste"></div>
+      <div class="footer">
+        <a href="javascript:history.back()" class="footer-left">Volver</a>
+      </div>
+    </div>
+    <script>
+      const opciones = [
+        [
+          "Esta no es la página que estás buscando.",
+          '<br><img src="assets/404/obi.gif" alt="Obi Wan Kenobi" style="width: 100%;"><br>',
+        ],
+        [
+          "Mondongo.",
+          '<br><img src="assets/404/mondongo.jpg" alt="Mondongo" style="width: 100%"><br>',
+        ],
+        [
+          "Estas perdído pá, volve por donde viniste.",
+          '<br><img src="assets/404/pileta.jpeg" alt="Pileta" style="width: 100%"><br>',
+        ],
+        [
+          "¡Upa! Parece que te mandaste una cagada y terminaste en la loma del orto.",
+          '<br><img src="assets/404/pileta.jpeg" alt="Pileta" style="width: 100%"><br>',
+        ],
+        [
+          "Acá no hay nada, circule.",
+          '<br><img src="assets/404/nada.gif" alt="Nada" style="width: 100%;"><br>',
+        ],
+        [
+          "Acá no hay nada, volvé por donde viniste.",
+          '<br><img src="assets/404/nada.gif" alt="Nada" style="width: 100%;"><br>',
+        ],
+        [
+          "Esta página se fue a tomar uno fernet.",
+          '<br><img src="assets/404/fernet.gif" alt="Fernet" style="width: 50%;display: block;margin-left: auto;margin-right: auto;"><br>',
+        ],
+        [
+          "La página se fue a comprar puchos.",
+          '<p style="text-align: center; font-size: 66px">🚬</p>',
+        ],
+        [
+          "¡Felicitaciones! Encontraste algo que no existe.",
+          '<br><img src="assets/404/no-existe.gif" alt="No existe" style="width: 100%;"><br>',
+        ],
+        [
+          "Está página no existe ¿Sera algo temporal o permanente?.",
+          '<p style="text-align: center; font-size: 66px">🤔💭</p>',
+        ],
+        [
+          "Upssss...",
+          '<p style="text-align: center; font-size: 66px">☠️💀☠️</p>',
+        ],
+        [
+          "Se nota que esto esta atado con alambre.",
+          '<p style="text-align: center; font-size: 66px">〰️➰➿➰〰️</p>',
+        ],
+        [
+          "JAJAJA, ay pero que idiota.",
+          '<br><iframe width="100%" height="400px" src="https://www.youtube.com/embed/3h6kgAe0Nnw?autoplay=1&mute=1"></iframe><br>',
+        ],
+        [
+          "No hay nada, ni si quiera chistes.",
+          '<p style="text-align: center; font-size: 66px">😔</p>',
+        ],
+      ];
+      const H1 = document.getElementsByTagName("h1")[0];
+      const rand = Math.floor(Math.random() * opciones.length);
+      H1.textContent = `404 - ${opciones[rand][0]}`;
+      const chiste = document.getElementById("chiste");
+      chiste.innerHTML = opciones[rand][1] ?? "";
+      const t = document.getElementById("template");
+    </script>
+  </body>
+</html>

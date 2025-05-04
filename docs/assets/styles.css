@@ -60,6 +60,17 @@ body {
   justify-content: space-between;
 }
 
+code {
+  color: #8ec07c;
+  font-style: italic;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .content {
   max-width: 62rem;
   min-width: 15rem;
@@ -107,6 +118,12 @@ body {
 
 .footer-right {
   margin-left: auto;
+}
+
+.fake-title {
+  color: #d8a657;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease-in-out;
 }
 
 @media (max-width: 900px) {
